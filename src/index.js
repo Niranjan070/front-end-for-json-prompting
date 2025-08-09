@@ -1,52 +1,29 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Full Text to JSON Converter
+// Pure Frontend - No data processing
 function TextToJsonApp() {
   const [input, setInput] = useState("");
-  const [outputJson, setOutputJson] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showOutput, setShowOutput] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
     
+    // Frontend-only: Just show loading and then display placeholder
     setIsLoading(true);
     
-    // Mock API delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Mock JSON response
-    const mockOutput = {
-      "input": {
-        "originalText": input,
-        "processedAt": new Date().toISOString(),
-        "wordCount": input.split(' ').length,
-        "characterCount": input.length
-      },
-      "analysis": {
-        "language": "en",
-        "sentiment": "neutral",
-        "confidence": 0.92
-      },
-      "extractedData": {
-        "keywords": input.split(' ')
-          .filter(word => word.length > 3)
-          .slice(0, 5)
-          .map(word => word.toLowerCase()),
-        "topics": ["general", "text-analysis"]
-      }
-    };
-    
-    setOutputJson(mockOutput);
-    setIsLoading(false);
+    // Simulate loading time for UI demonstration
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowOutput(true);
+    }, 2000);
   };
 
   const copyToClipboard = () => {
-    if (outputJson) {
-      navigator.clipboard.writeText(JSON.stringify(outputJson, null, 2));
-      alert('JSON copied to clipboard!');
-    }
+    // Frontend-only: Just show success message
+    alert('JSON copied to clipboard! (Frontend Demo)');
   };
 
   return (
@@ -151,7 +128,7 @@ function TextToJsonApp() {
           </p>
         </form>
 
-        {outputJson && (
+        {showOutput && (
           <div style={{ textAlign: 'left' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <h3 style={{ fontSize: '20px', margin: 0 }}>Generated JSON:</h3>
@@ -180,7 +157,12 @@ function TextToJsonApp() {
               maxHeight: '400px',
               whiteSpace: 'pre-wrap'
             }}>
-              {JSON.stringify(outputJson, null, 2)}
+{`{
+  "message": "Frontend Demo - No Processing",
+  "input_received": "${input}",
+  "status": "Ready for backend integration",
+  "note": "This is a UI demonstration only"
+}`}
             </pre>
           </div>
         )}
