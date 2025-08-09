@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent, MouseEvent } from 'react';
 import ReactDOM from 'react-dom/client';
+import './index.css';
 
 // Pure Frontend - No data processing
 const TextToJsonApp: React.FC = () => {
@@ -47,32 +48,46 @@ const TextToJsonApp: React.FC = () => {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(to bottom right, #000000, #581c87, #000000)',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-      color: 'white',
-      fontFamily: 'Arial, sans-serif'
-    }}>
-      {/* Header with Glassmorphism */}
+    <>
+      {/* Animated background */}
+      <div className="app-background">
+        <div className="sparkle"></div>
+        <div className="sparkle"></div>
+        <div className="sparkle"></div>
+        <div className="sparkle"></div>
+        <div className="sparkle"></div>
+        <div className="floating-orb orb-1"></div>
+        <div className="floating-orb orb-2"></div>
+        <div className="floating-orb orb-3"></div>
+      </div>
+
+      <div style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        color: 'white',
+        fontFamily: 'Arial, sans-serif',
+        position: 'relative',
+        zIndex: 1
+      }}>
+      {/* Header with enhanced glassmorphism */}
       <header style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 1000,
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255, 255, 255, 0.2)',
+        background: 'rgba(255, 255, 255, 0.05)',
+        backdropFilter: 'blur(30px)',
+        WebkitBackdropFilter: 'blur(30px)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
         borderTop: 'none',
         borderLeft: 'none',
         borderRight: 'none',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+        boxShadow: '0 8px 32px rgba(138, 92, 246, 0.3)',
         padding: '20px 0'
       }}>
         <div style={{
@@ -117,39 +132,42 @@ const TextToJsonApp: React.FC = () => {
           flexWrap: 'wrap'
         }}>
           <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '12px',
-            padding: '16px 20px',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            minWidth: '150px',
-            textAlign: 'center'
+            background: 'rgba(138, 92, 246, 0.1)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '16px',
+            padding: '20px 24px',
+            border: '1px solid rgba(168, 85, 247, 0.3)',
+            minWidth: '160px',
+            textAlign: 'center',
+            boxShadow: '0 8px 32px rgba(138, 92, 246, 0.2)'
           }}>
             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>⚡</div>
             <div style={{ fontSize: '14px', opacity: 0.9 }}>Fast Processing</div>
           </div>
           
           <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '12px',
-            padding: '16px 20px',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            minWidth: '150px',
-            textAlign: 'center'
+            background: 'rgba(138, 92, 246, 0.1)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '16px',
+            padding: '20px 24px',
+            border: '1px solid rgba(168, 85, 247, 0.3)',
+            minWidth: '160px',
+            textAlign: 'center',
+            boxShadow: '0 8px 32px rgba(138, 92, 246, 0.2)'
           }}>
             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🎯</div>
             <div style={{ fontSize: '14px', opacity: 0.9 }}>Accurate Results</div>
           </div>
           
           <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(10px)',
-            borderRadius: '12px',
-            padding: '16px 20px',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            minWidth: '150px',
-            textAlign: 'center'
+            background: 'rgba(138, 92, 246, 0.1)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '16px',
+            padding: '20px 24px',
+            border: '1px solid rgba(168, 85, 247, 0.3)',
+            minWidth: '160px',
+            textAlign: 'center',
+            boxShadow: '0 8px 32px rgba(138, 92, 246, 0.2)'
           }}>
             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🔒</div>
             <div style={{ fontSize: '14px', opacity: 0.9 }}>Secure & Private</div>
@@ -166,18 +184,19 @@ const TextToJsonApp: React.FC = () => {
               style={{
                 width: '100%',
                 maxWidth: '600px',
-                borderRadius: '16px',
-                background: 'rgba(0, 0, 0, 0.8)',
-                border: '2px solid #8b5cf6',
+                borderRadius: '20px',
+                background: 'rgba(0, 0, 0, 0.6)',
+                border: '2px solid rgba(168, 85, 247, 0.5)',
                 fontSize: '16px',
                 color: 'white',
-                padding: '16px',
+                padding: '20px',
                 outline: 'none',
                 resize: 'vertical',
                 fontFamily: 'inherit',
-                transition: 'border-color 0.3s ease',
-                boxShadow: '0 4px 20px rgba(139, 92, 246, 0.1)',
-                boxSizing: 'border-box'
+                transition: 'all 0.3s ease',
+                boxShadow: '0 8px 32px rgba(138, 92, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                boxSizing: 'border-box',
+                backdropFilter: 'blur(10px)'
               }}
             />
           </div>
@@ -187,11 +206,11 @@ const TextToJsonApp: React.FC = () => {
             disabled={isLoading || !input.trim()}
             style={{
               background: isLoading || !input.trim() 
-                ? 'linear-gradient(135deg, #4a5568, #2d3748)' 
-                : 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                ? 'rgba(75, 85, 99, 0.6)' 
+                : 'linear-gradient(135deg, rgba(168, 85, 247, 0.9), rgba(124, 58, 237, 0.9))',
               border: 'none',
-              borderRadius: '12px',
-              padding: '14px 32px',
+              borderRadius: '16px',
+              padding: '16px 40px',
               color: 'white',
               cursor: isLoading || !input.trim() ? 'not-allowed' : 'pointer',
               fontSize: '16px',
@@ -200,14 +219,15 @@ const TextToJsonApp: React.FC = () => {
               transition: 'all 0.3s ease',
               boxShadow: isLoading || !input.trim() 
                 ? 'none' 
-                : '0 8px 25px rgba(139, 92, 246, 0.3)',
+                : '0 8px 32px rgba(138, 92, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
               transform: isLoading || !input.trim() ? 'none' : 'translateY(-2px)',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px',
+              gap: '10px',
               margin: '0 auto',
-              minWidth: '180px',
-              justifyContent: 'center'
+              minWidth: '200px',
+              justifyContent: 'center',
+              backdropFilter: 'blur(10px)'
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -237,27 +257,32 @@ const TextToJsonApp: React.FC = () => {
               <button
                 onClick={copyToClipboard}
                 style={{
-                  background: '#7c3aed',
+                  background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.8), rgba(124, 58, 237, 0.8))',
                   border: 'none',
-                  borderRadius: '8px',
-                  padding: '8px 16px',
+                  borderRadius: '12px',
+                  padding: '10px 20px',
                   color: 'white',
                   cursor: 'pointer',
-                  fontSize: '14px'
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: '0 4px 20px rgba(138, 92, 246, 0.3)'
                 }}
               >
                 📋 Copy JSON
               </button>
             </div>
             <pre style={{
-              background: 'rgba(0, 0, 0, 0.6)',
-              border: '1px solid rgba(139, 92, 246, 0.3)',
-              borderRadius: '12px',
-              padding: '20px',
+              background: 'rgba(0, 0, 0, 0.4)',
+              border: '1px solid rgba(168, 85, 247, 0.3)',
+              borderRadius: '16px',
+              padding: '24px',
               fontSize: '14px',
               overflow: 'auto',
               maxHeight: '400px',
-              whiteSpace: 'pre-wrap'
+              whiteSpace: 'pre-wrap',
+              backdropFilter: 'blur(10px)',
+              boxShadow: 'inset 0 2px 10px rgba(0, 0, 0, 0.3)'
             }}>
 {`{
   "message": "Frontend Demo - No Processing",
@@ -279,7 +304,8 @@ const TextToJsonApp: React.FC = () => {
       }}>
         Text to JSON Converter
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 
