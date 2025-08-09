@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 
-const InputForm = ({ onSubmit, isLoading }) => {
-  const [inputText, setInputText] = useState('');
+interface InputFormProps {
+  onSubmit: (text: string) => void;
+  isLoading: boolean;
+}
+
+const InputForm: React.FC<InputFormProps> = ({ onSubmit, isLoading }) => {
+  const [inputText, setInputText] = useState<string>('');
 
   const handleSubmit = () => {
     if (inputText.trim()) {
@@ -9,7 +14,7 @@ const InputForm = ({ onSubmit, isLoading }) => {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && e.ctrlKey) {
       handleSubmit();
     }

@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 
-const OutputDisplay = ({ outputJson, isVisible }) => {
-  const [copyStatus, setCopyStatus] = useState('idle');
+interface OutputDisplayProps {
+  outputJson: any;
+  isVisible: boolean;
+}
+
+type CopyStatus = 'idle' | 'copied' | 'error';
+
+const OutputDisplay: React.FC<OutputDisplayProps> = ({ outputJson, isVisible }) => {
+  const [copyStatus, setCopyStatus] = useState<CopyStatus>('idle');
 
   const handleCopyToClipboard = async () => {
     try {

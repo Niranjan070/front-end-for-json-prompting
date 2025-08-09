@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent, ChangeEvent, MouseEvent } from 'react';
 import ReactDOM from 'react-dom/client';
 
 // Pure Frontend - No data processing
-function TextToJsonApp() {
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [showOutput, setShowOutput] = useState(false);
+const TextToJsonApp: React.FC = () => {
+  const [input, setInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showOutput, setShowOutput] = useState<boolean>(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (!input.trim()) return;
     
@@ -21,9 +21,29 @@ function TextToJsonApp() {
     }, 2000);
   };
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (): void => {
     // Frontend-only: Just show success message
     alert('JSON copied to clipboard! (Frontend Demo)');
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
+    setInput(e.target.value);
+  };
+
+  const handleMouseEnter = (e: MouseEvent<HTMLButtonElement>): void => {
+    if (!isLoading && input.trim()) {
+      const target = e.target as HTMLButtonElement;
+      target.style.transform = 'translateY(-3px)';
+      target.style.boxShadow = '0 12px 35px rgba(139, 92, 246, 0.4)';
+    }
+  };
+
+  const handleMouseLeave = (e: MouseEvent<HTMLButtonElement>): void => {
+    if (!isLoading && input.trim()) {
+      const target = e.target as HTMLButtonElement;
+      target.style.transform = 'translateY(-2px)';
+      target.style.boxShadow = '0 8px 25px rgba(139, 92, 246, 0.3)';
+    }
   };
 
   return (
@@ -140,7 +160,7 @@ function TextToJsonApp() {
           <div style={{ marginBottom: '20px', width: '100%', display: 'flex', justifyContent: 'center' }}>
             <textarea
               value={input}
-              onChange={e => setInput(e.target.value)}
+              onChange={handleInputChange}
               placeholder="Enter your text here..."
               rows={4}
               style={{
@@ -189,18 +209,8 @@ function TextToJsonApp() {
               minWidth: '180px',
               justifyContent: 'center'
             }}
-            onMouseEnter={(e) => {
-              if (!isLoading && input.trim()) {
-                e.target.style.transform = 'translateY(-3px)';
-                e.target.style.boxShadow = '0 12px 35px rgba(139, 92, 246, 0.4)';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (!isLoading && input.trim()) {
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 8px 25px rgba(139, 92, 246, 0.3)';
-              }
-            }}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             {isLoading ? (
               <>
@@ -271,9 +281,10 @@ function TextToJsonApp() {
       </div>
     </div>
   );
-}
+};
 
 const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Failed to find the root element');
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(<TextToJsonApp />);

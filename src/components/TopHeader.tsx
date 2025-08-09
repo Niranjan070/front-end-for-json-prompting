@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TopHeader = () => {
+const TopHeader: React.FC = () => {
   return (
     <header className="top-header">
       <div className="top-header-content">
