@@ -14,20 +14,20 @@ const mockApiCall = (prompt) => {
   });
 };
 
+
 function App() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showOutput, setShowOutput] = useState(false);
   // const [theme, setTheme] = useState('bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500');
 
   const handleChange = (e) => setInput(e.target.value);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    const result = await mockApiCall(input);
-    setOutput(result);
-    setLoading(false);
+    setShowOutput(true);
+    setOutput(''); // Show output field, but no data
   };
 
   const handleCopy = () => {
@@ -41,7 +41,7 @@ function App() {
         <Header />
     <div className="my-8" />
     <InputForm onSubmit={handleSubmit} value={input} onChange={handleChange} />
-        {output && (
+        {showOutput && (
           <OutputDisplay output={output} onCopy={handleCopy} />
         )}
       </div>
