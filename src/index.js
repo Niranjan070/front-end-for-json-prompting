@@ -38,40 +38,106 @@ function TextToJsonApp() {
       color: 'white',
       fontFamily: 'Arial, sans-serif'
     }}>
-      {/* Floating sparkle */}
-      <div style={{
-        position: 'absolute',
-        top: '20%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        fontSize: '48px',
-        opacity: 0.6,
-        animation: 'float 3s ease-in-out infinite'
+      {/* Header with Glassmorphism */}
+      <header style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255, 255, 255, 0.2)',
+        borderTop: 'none',
+        borderLeft: 'none',
+        borderRight: 'none',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+        padding: '20px 0'
       }}>
-        ✨
-      </div>
+        <div style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          padding: '0 20px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <h1 style={{
+            fontSize: '1.8rem',
+            fontWeight: '700',
+            margin: 0,
+            color: 'white',
+            letterSpacing: '1px',
+            textShadow: '0 2px 10px rgba(0, 0, 0, 0.3)'
+          }}>
+            Text to JSON Converter
+          </h1>
+        </div>
+      </header>
 
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateX(-50%) translateY(0px); }
-          50% { transform: translateX(-50%) translateY(-20px); }
-        }
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
       `}</style>
       
-      <div style={{ maxWidth: '800px', width: '100%', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '10px' }}>
-          Plain Text to JSON Converter
-        </h1>
+      <div style={{ maxWidth: '800px', width: '100%', textAlign: 'center', marginTop: '100px' }}>
         <p style={{ fontSize: '1.1rem', opacity: 0.8, marginBottom: '40px' }}>
           Transform your plain text into structured JSON format
         </p>
+
+        {/* Feature Cards */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '20px',
+          marginBottom: '40px',
+          flexWrap: 'wrap'
+        }}>
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '12px',
+            padding: '16px 20px',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            minWidth: '150px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>⚡</div>
+            <div style={{ fontSize: '14px', opacity: 0.9 }}>Fast Processing</div>
+          </div>
+          
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '12px',
+            padding: '16px 20px',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            minWidth: '150px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🎯</div>
+            <div style={{ fontSize: '14px', opacity: 0.9 }}>Accurate Results</div>
+          </div>
+          
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(10px)',
+            borderRadius: '12px',
+            padding: '16px 20px',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            minWidth: '150px',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🔒</div>
+            <div style={{ fontSize: '14px', opacity: 0.9 }}>Secure & Private</div>
+          </div>
+        </div>
         
-        <form onSubmit={handleSubmit} style={{ marginBottom: '30px' }}>
-          <div style={{ position: 'relative', marginBottom: '20px' }}>
+        <form onSubmit={handleSubmit} style={{ marginBottom: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ marginBottom: '20px', width: '100%', display: 'flex', justifyContent: 'center' }}>
             <textarea
               value={input}
               onChange={e => setInput(e.target.value)}
@@ -85,47 +151,73 @@ function TextToJsonApp() {
                 border: '2px solid #8b5cf6',
                 fontSize: '16px',
                 color: 'white',
-                padding: '16px 60px 16px 16px',
+                padding: '16px',
                 outline: 'none',
                 resize: 'vertical',
-                fontFamily: 'inherit'
+                fontFamily: 'inherit',
+                transition: 'border-color 0.3s ease',
+                boxShadow: '0 4px 20px rgba(139, 92, 246, 0.1)',
+                boxSizing: 'border-box'
               }}
             />
-            <button
-              type="submit"
-              disabled={isLoading || !input.trim()}
-              style={{
-                position: 'absolute',
-                right: '10px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: isLoading || !input.trim() ? '#666' : '#8b5cf6',
-                border: 'none',
-                borderRadius: '8px',
-                padding: '8px 12px',
-                color: 'white',
-                cursor: isLoading || !input.trim() ? 'not-allowed' : 'pointer',
-                fontSize: '14px'
-              }}
-            >
-              {isLoading ? (
+          </div>
+          
+          <button
+            type="submit"
+            disabled={isLoading || !input.trim()}
+            style={{
+              background: isLoading || !input.trim() 
+                ? 'linear-gradient(135deg, #4a5568, #2d3748)' 
+                : 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+              border: 'none',
+              borderRadius: '12px',
+              padding: '14px 32px',
+              color: 'white',
+              cursor: isLoading || !input.trim() ? 'not-allowed' : 'pointer',
+              fontSize: '16px',
+              fontWeight: '600',
+              letterSpacing: '0.5px',
+              transition: 'all 0.3s ease',
+              boxShadow: isLoading || !input.trim() 
+                ? 'none' 
+                : '0 8px 25px rgba(139, 92, 246, 0.3)',
+              transform: isLoading || !input.trim() ? 'none' : 'translateY(-2px)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              margin: '0 auto',
+              minWidth: '180px',
+              justifyContent: 'center'
+            }}
+            onMouseEnter={(e) => {
+              if (!isLoading && input.trim()) {
+                e.target.style.transform = 'translateY(-3px)';
+                e.target.style.boxShadow = '0 12px 35px rgba(139, 92, 246, 0.4)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isLoading && input.trim()) {
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 8px 25px rgba(139, 92, 246, 0.3)';
+              }
+            }}
+          >
+            {isLoading ? (
+              <>
                 <div style={{
-                  width: '16px',
-                  height: '16px',
-                  border: '2px solid #ccc',
+                  width: '18px',
+                  height: '18px',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
                   borderTop: '2px solid white',
                   borderRadius: '50%',
                   animation: 'spin 1s linear infinite'
                 }}></div>
-              ) : (
-                '→'
-              )}
-            </button>
-          </div>
-          
-          <p style={{ fontSize: '14px', opacity: 0.6 }}>
-            Press Ctrl+Enter to submit quickly
-          </p>
+                Processing...
+              </>
+            ) : (
+              <span>Convert to JSON</span>
+            )}
+          </button>
         </form>
 
         {showOutput && (
